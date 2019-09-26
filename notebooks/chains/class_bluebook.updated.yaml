@@ -1,0 +1,177 @@
+theory:
+  classy:
+    extra_args: null
+    input_params:
+    - N_ur
+    - N_ncdm
+    - m_ncdm
+    - T_ncdm
+    - n_s
+    - omega_b
+    - omega_cdm
+    - 100*theta_s
+    - tau_reio
+    - A_s
+    output_params:
+    - H0
+    path: null
+    renames:
+      As: A_s
+      ns: n_s
+      nrun: alpha_s
+      nrunrun: beta_s
+      nt: n_t
+      ntrun: alpha_t
+      rdrag: rs_drag
+      omegak: Omega_k
+      omegal: Omega_Lambda
+      w: w0_fld
+      wa: wa_fld
+      omegabh2: omega_b
+      omegab: Omega_b
+      omegach2: omega_cdm
+      omegac: Omega_cdm
+      omegam: Omega_m
+      omegan: Omega_nu
+      tau: tau_reio
+      zrei: z_reio
+      deltazrei: reionization_width
+      helium_redshift: helium_fullreio_redshift
+      helium_delta_redshift: helium_fullreio_width
+      yhe: YHe
+      yheused: YHe
+    speed: 0.2
+    use_planck_names: false
+likelihood:
+  my_cl_like:
+    external: true
+    input_params: []
+    output_params: []
+    speed: -1
+sampler:
+  mcmc:
+    Rminus1_cl_level: 0.95
+    Rminus1_cl_stop: 0.2
+    Rminus1_last: .inf
+    Rminus1_single_split: 4
+    Rminus1_stop: 0.01
+    blocking: null
+    blocks: null
+    burn_in: 20d
+    callback_every: null
+    callback_function: null
+    check_every: 40d
+    converged: null
+    covmat: chains/my_imaginary_cmb.covmat
+    covmat_params: null
+    drag: false
+    drag_limits:
+    - 1
+    - 10
+    i_last_slow_block: null
+    learn_proposal: true
+    learn_proposal_Rminus1_max: 2.0
+    learn_proposal_Rminus1_max_early: 30.0
+    learn_proposal_Rminus1_min: 0.0
+    max_samples: .inf
+    max_tries: 40d
+    mpi_size: null
+    output_every: 20
+    oversample: false
+    oversampling_factors: null
+    proposal_scale: 3.0
+    seed: null
+params:
+  N_ur:
+    value: 2.0328
+  N_ncdm:
+    value: 1
+  m_ncdm:
+    value: 0.06
+  T_ncdm:
+    value: 0.71611
+  logA:
+    prior:
+      max: 3.91
+      min: 1.61
+    ref:
+      dist: norm
+      loc: 3.05
+      scale: 0.001
+    proposal: 0.001
+    latex: \log(10^{10} A_\mathrm{s})
+    drop: true
+  n_s:
+    prior:
+      max: 1.1
+      min: 0.9
+    ref:
+      dist: norm
+      loc: 0.965
+      scale: 0.004
+    proposal: 0.002
+    latex: n_s
+    renames:
+    - ns
+  omega_b:
+    prior:
+      max: 0.1
+      min: 0.005
+    ref:
+      dist: norm
+      loc: 0.0224
+      scale: 0.0001
+    proposal: 0.0001
+    latex: \Omega_\mathrm{b} h^2
+    renames:
+    - omegabh2
+  omega_cdm:
+    prior:
+      max: 0.99
+      min: 0.001
+    ref:
+      dist: norm
+      loc: 0.12
+      scale: 0.001
+    proposal: 0.0005
+    latex: \Omega_\mathrm{c} h^2
+    renames:
+    - omegach2
+  theta_s_1e2:
+    prior:
+      max: 10.0
+      min: 0.5
+    ref:
+      dist: norm
+      loc: 1.0416
+      scale: 0.0004
+    proposal: 0.0002
+    latex: "100\theta_\\mathrm{s}"
+    drop: true
+  100*theta_s:
+    value: 'lambda theta_s_1e2: theta_s_1e2'
+    derived: false
+  tau_reio:
+    prior:
+      max: 0.08
+      min: 0.01
+    ref:
+      dist: norm
+      loc: 0.055
+      scale: 0.006
+    proposal: 0.003
+    latex: "\tau_\\mathrm{reio}"
+    renames:
+    - tau
+  A_s:
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+    latex: A_s
+    derived: true
+    renames:
+    - As
+  H0:
+    latex: H_0
+    derived: true
+force: true
+output: class_bluebook
+resume: false
