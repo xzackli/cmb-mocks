@@ -62,7 +62,7 @@ sampler:
     callback_function: null
     check_every: 40d
     converged: null
-    covmat: chains/my_imaginary_cmb.covmat
+    covmat: class_bluebook.covmat
     covmat_params: null
     drag: false
     drag_limits:
@@ -79,7 +79,7 @@ sampler:
     output_every: 20
     oversample: false
     oversampling_factors: null
-    proposal_scale: 3.0
+    proposal_scale: 2.4
     seed: null
 params:
   N_ur:
@@ -172,6 +172,5 @@ params:
   H0:
     latex: H_0
     derived: true
-force: true
+resume: true
 output: class_bluebook
-resume: false
